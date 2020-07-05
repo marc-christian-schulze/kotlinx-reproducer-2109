@@ -42,11 +42,6 @@ class ExampleResourceTest {
     fun `Passing test using S3 built-in Publisher`() = runBlocking {
         val minIOExecutable = File("minio").absoluteFile
 
-        val chunks = ArrayList<ByteBuffer>()
-        readFromFile(minIOExecutable.toPath()).collect {
-            chunks.add(it)
-        }
-
         val requestBody = AsyncRequestBody.fromFile(minIOExecutable)
 
         runTestWorkflow(minIOExecutable, "test3-bucket", requestBody)
