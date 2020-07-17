@@ -5,6 +5,7 @@ import io.reactivex.Flowable
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.reactive.asPublisher
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import software.amazon.awssdk.core.async.AsyncRequestBody
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
@@ -15,7 +16,7 @@ import javax.ws.rs.core.MediaType
 @QuarkusTest
 class ExampleResourceTest {
 
-    @Test
+    @RepeatedTest(20)
     fun `Failing test using Kotlin Coroutine's Flow`() = runBlocking {
         val minIOExecutable = File("minio").absoluteFile
 
