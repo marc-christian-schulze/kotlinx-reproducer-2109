@@ -16,6 +16,15 @@ import javax.ws.rs.core.MediaType
 @QuarkusTest
 class ExampleResourceTest {
 
+    @Test
+    fun `Failing test using AheadFileReadingPublisher`() = runBlocking {
+        val minIOExecutable = File("minio").absoluteFile
+
+        val requestBody = AsyncRequestBody.fromPublisher(AheadFileReadingPublisher(minIOExecutable.toPath()))
+
+        runTestWorkflow(minIOExecutable, "test1-bucket", requestBody)
+    }
+
     @RepeatedTest(20)
     fun `Failing test using Kotlin Coroutine's Flow`() = runBlocking {
         val minIOExecutable = File("minio").absoluteFile
